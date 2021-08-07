@@ -47,15 +47,69 @@ if(isset($_POST['add-student'])){
   $city = $_POST['city'];
   $contact = $_POST['contact'];
   $class = $_POST['class'];
+  $email = $_POST['email'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $c_password = $_POST['c_password'];
+
 
   $picture = explode('.',$_FILES['picture']['name']);
   $picture_ex = end($picture);
 
   $picture_name = $roll.'.'.$picture_ex;
 
-  $query = "INSERT INTO `student_info`(`name`, `roll`, `class`, `city`, `contact`, `photo`) VALUES ('$name', '$roll', '$class', '$city', '$contact', '$picture_name')";
 
-  $result = mysqli_query($link, $query);
+  $input_error = array();
+
+  if(empty($name)){
+    $input_error['name'] = "The Name field is required.";
+  }
+
+  if(empty($roll)){
+    $input_error['roll'] = "The Roll field is required.";
+  }
+
+  if(empty($city)){
+    $input_error['city'] = "The City field is required.";
+  }
+
+  if(empty($contact)){
+    $input_error['contact'] = "The Contact field is required.";
+  }
+
+  if(empty($class)){
+    $input_error['class'] = "The Class field is required.";
+  }
+
+  if(empty($email)){
+    $input_error['email'] = "The Email field is required.";
+  }
+
+  if(empty($username)){
+    $input_error['username'] = "The Username field is required.";
+  }
+
+  if(empty($password)){
+    $input_error['password'] = "The Password field is required.";
+  }
+
+  if(empty($c_password)){
+    $input_error['c_password'] = "The Confirm Password field is required.";
+  }
+
+
+  if(count($input_error) == 0){
+    $email_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `email` = '$email';");
+   if(mysqli_num_rows($email_check) == 0){
+     $username_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `username` = '$username';");
+     if(mysqli_num_rows($username_check) == 0){
+       if(strlen($username) > 7){
+          if(strlen($password) > 7 ){
+               if($password == $c_password){
+                 $password=md5($password);
+  
+                 $query = "INSERT INTO `student_info`(`name`, `roll`, `class`, `city`, `contact`, `email`, `username`, `password`, `photo`, `status`) VALUES ('$name', '$roll', '$class', '$city', '$contact', '$email', '$username', '$password', '$picture_name', 'inactive')";
+                 $result = mysqli_query($link, $query);
 
   if($result){
     // $success = "Data Insertion Successful!";
@@ -64,6 +118,28 @@ if(isset($_POST['add-student'])){
   } else {
     $error = "Wrong!";
   }
+
+} else {
+  $password_not_match = "Password Doesn't Match!";
+}
+} else {
+$password_l = "Password Must Be More Than 7 Characters.";
+}
+} else {
+$username_l = "Username Must Be More Than 7 Characters.";
+}
+
+} else {
+$username_error = "This Username Already Exists";
+}
+
+}  else {
+$email_error = "This Email Address Already Exists";
+
+}
+
+
+}
 
 }
 
@@ -112,6 +188,26 @@ if(isset($_POST['add-student'])){
             <option value="3rd">3rd</option>
             <option value="4th">4th</option>
           </select>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control"  id="email" type="email" name="email" placeholder="Email" required="" >
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input class="form-control" id="username" type="text" name="username" placeholder="Username" required="" >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" id="password" type="password" name="password" placeholder="Password" required="" >
+        </div>
+
+        <div class="form-group">
+          <label for="c_password">Confirm Password</label>
+          <input class="form-control" id="c_password" type="password" name="c_password" placeholder="Confirm Password" required=""  >
         </div>
 
         <div class="form-group">
