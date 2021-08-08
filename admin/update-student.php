@@ -13,8 +13,11 @@ if(isset($_POST['update-student'])){
   $city = $_POST['city'];
   $contact = $_POST['contact'];
   $class = $_POST['class'];
+  $email = $_POST['email'];
+  $username = $_POST['username'];
+  $status = $_POST['status'];
 
-  $query = "UPDATE `student_info` SET `name` = '$name' ,`roll` = '$roll' ,`class` = '$class' ,`city` = '$city' ,`contact` = '$contact'  WHERE `id` = '$id'";
+  $query = "UPDATE `student_info` SET `name` = '$name' ,`roll` = '$roll' ,`class` = '$class' ,`city` = '$city' ,`contact` = '$contact', `email` = '$email', `username` = '$username', `status` = '$status' WHERE `id` = '$id'";
   $result = mysqli_query($link, $query);
 
   if($result){
@@ -70,6 +73,21 @@ $db_row = mysqli_fetch_assoc($db_data);
             <option <?php echo $db_row['class']=='3rd' ? 'selected=""':''; ?> value="3rd">3rd</option>
             <option <?php echo $db_row['class']=='4th' ? 'selected=""':''; ?> value="4th">4th</option>
           </select>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control"  id="email" type="email" name="email" placeholder="Email" required="" value="<?= $db_row['email'] ?>">
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input class="form-control" id="username" type="text" name="username" placeholder="Username" required="" value="<?= $db_row['username'] ?>">
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input class="form-control" id="status" type="text" name="status" placeholder="Status" required="" value="<?= $db_row['status'] ?>">
         </div>
 
         <div class="form-group">

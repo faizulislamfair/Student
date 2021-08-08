@@ -8,13 +8,16 @@
 	    <thead>
 
 			<tr>
-				<th>ID</th>
+				<!-- <th>ID</th> -->
 				<th>Photo</th>
 				<th>Name</th>
 				<th>Roll</th>
 				<th>Class</th>
 				<th>City</th>
 				<th>Contact</th>
+				<th>Email</th>
+				<!-- <th>Username</th> -->
+				<th>Status</th> 
 			    <th>Action</th>
 			</tr>
 
@@ -29,13 +32,16 @@
 												  
 
 			<tr>
-				<td style="padding-top:15px;"><?php echo $row['id']; ?></td>
+				<!-- <td style="padding-top:15px;"><?php echo $row['id']; ?></td> -->
 				<td><img style="width: 50px; height: 50px; border-radius: 50%;" src="student_images/<?php echo $row['photo']; ?>" alt="Student's Image"></td>
 				<td style="padding-top:15px;"><?php echo ucwords($row['name']); ?></td>
 				<td style="padding-top:15px;"><?php echo $row['roll']; ?></td>
 				<td style="padding-top:15px;"><?php echo $row['class']; ?></td>
 			    <td style="padding-top:15px;"><?php echo ucwords($row['city']); ?></td>
 				<td style="padding-top:15px;"><?php echo $row['contact']; ?></td>
+			    <td style="padding-top:15px;"><?php echo $row['email']; ?></td>
+				<!-- <td style="padding-top:15px;"><?php echo $row['username']; ?></td> -->
+			    <td style="padding-top:15px;"><?php echo $row['status']; ?></td>
 				<td>
 				   <a href="index.php?page=update-student&id=<?php echo base64_encode($row['id']); ?>" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> Edit</a> <br>
 				   <a href="delete_student.php?id=<?php echo base64_encode($row['id']); ?>"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>
