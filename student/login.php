@@ -14,7 +14,7 @@ if(isset($_POST['login'])) {
   $password = $_POST['password'];
 
 
-  $studentname_check = mysqli_query($link, "SELECT * FROM `student` WHERE `Roll` = '$Roll'");
+  $studentname_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `Roll` = '$Roll'");
   if(mysqli_num_rows($studentname_check) > 0){
    $row = mysqli_fetch_assoc($studentname_check);
 
@@ -52,7 +52,7 @@ if(isset($_POST['login'])) {
 
     <style>
 .btn-primary, .btn-primary:active, .btn-primary:visited{
-    width:60px;
+    width:80px;
     background-color: #2155c5;
     color: white;
     border-radius: 15px;
@@ -103,6 +103,7 @@ if(isset($_POST['login'])) {
   <header style="width:100%; height:90px; background: #2887e6">
    </header>
      <br> <br>
+     <a href="../"><input style="transform:translateX(-25px); float:right;" value="Back" class="btn btn-primary"></a>
      <h1 style="margin-left:465px;">Student Login</h1>
 
 
@@ -122,16 +123,16 @@ if(isset($_POST['login'])) {
            <br>
            <div>
            <input type="submit" value="Login" name="login" class="btn btn-primary">
-           <a href="../"><input style="transform:translateX(70px); float:right;" value="Back" class="btn btn-primary"></a>
+           <a href="register.php"><input style="transform:translateX(70px); float:right;" value="Register" class="btn btn-primary"></a>
            </div>
          </form>
          </div>
       </div>
      </div>
      <br>
-     <?php if(isset($roll_not_found)) { echo '<div class="alert alert-danger col-sm-4 col-sm offset-4">'.roll_not_found.'</div>'; } ?>
-     <?php if(isset($wrong_password)) { echo '<div class="alert alert-danger col-sm-4 col-sm offset-4">'.$wrong_password.'</div>'; } ?>
-     <?php if(isset($status_inactive)) { echo '<div class="alert alert-danger col-sm-4 col-sm offset-4">'.$status_inactive.'</div>'; } ?>
+     <?php if(isset($roll_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.roll_not_found.'</div>'; } ?>
+     <?php if(isset($wrong_password)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$wrong_password.'</div>'; } ?>
+     <?php if(isset($status_inactive)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$status_inactive.'</div>'; } ?>
 
    </div>
 
