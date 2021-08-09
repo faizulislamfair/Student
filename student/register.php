@@ -1,9 +1,32 @@
+<?php
+
+require_once './dbcon.php';
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../fonts/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.min.css">
+<link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/btn.css">
+
+
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
+
   <style>
    .btn-primary, .btn-primary:active, .btn-primary:visited{
     background-color: #2155c5;
@@ -14,7 +37,7 @@
     font-weight: 450;
     padding-left: 10px;
     padding-right: 10px;
-    width: 60px;
+    width: 100px;
     height: 32px;
 }
 
@@ -27,15 +50,20 @@
     padding-right: 10px;
     transition: 0.2s;
     font-weight: 450;
-    width: 80px;
+    width: 125px;
     height: 32px;
 }
  </style>
 </head>
 <body>
   
+<header style="width:100%; height:90px; background: #2887e6">
+   </header>
 
 <h1 style="margin-left: 475px;" class="text-primary"><i class="fa fa-user-plus"></i> Add Student </h1>
+
+<a href="login.php"><button style="float:right; transform: translateY(-55px);" class="btn btn-primary">Back</button></a>
+
 
 
 <?php
@@ -113,7 +141,7 @@ if(isset($_POST['add-student'])){
 
   if($result){
     // $success = "Data Insertion Successful!";
-    move_uploaded_file($_FILES['picture']['tmp_name'], 'student_images/'.$picture_name);
+    move_uploaded_file($_FILES['picture']['tmp_name'], '../admin/student_images/'.$picture_name);
     // header('location: add-student.php');
   } else {
     $error = "Wrong!";
@@ -224,7 +252,13 @@ $email_error = "This Email Address Already Exists";
    
    </div>
 </div>
-<a href="index.php"><button style="float:right; transform: translateY(-45px);" class="btn btn-primary">Back</button></a>
+
+
+
+<footer class="footer-area">
+			<p>Copyright &COPY; 2021 S.M. Faizul Islam Fair</p>
+		</footer>
+
 
 </body>
 </html>

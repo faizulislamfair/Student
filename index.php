@@ -51,9 +51,9 @@
    
    <br> <br>
 
-<div style="margin-left:190px;" class="container text-center">  
+<div style="margin-left:325px;" class="container text-center">  
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card">
       <div class="card-body">
         <h2> Student </h2>
@@ -61,7 +61,7 @@
     </div>
      <a href="student/login.php" class="btn btn-primary mt-3" >View</a>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card">
       <div class="card-body">
         <h2> Admin </h2>
