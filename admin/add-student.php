@@ -112,9 +112,9 @@ if(isset($_POST['add-student'])){
                  $result = mysqli_query($link, $query);
 
   if($result){
-    // $success = "Data Insertion Successful!";
+     //$success = "Data Insertion Successful!";
     move_uploaded_file($_FILES['picture']['tmp_name'], 'student_images/'.$picture_name);
-    // header('location: add-student.php');
+     //header('location: add-student.php');
   } else {
     $error = "Wrong!";
   }

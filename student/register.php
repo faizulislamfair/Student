@@ -80,6 +80,23 @@ if(isset($_POST['add-student'])){
   $password = $_POST['password'];
   $c_password = $_POST['c_password'];
 
+  if(isset($_POST['email'])){
+    
+    $email = $_POST['email'];
+    $subject = "Email Alright";
+    $body = substr(str_shuffle("0123456789"), 0, 6);
+    $headers = "From: penguinpakhi@gmail.com";
+  
+    if(mail($email, $subject, $body, $headers)){
+        //echo "<b>email sent to $email</b>";
+    }else{
+        echo "Email sending failed..";
+    }
+  
+  
+  }
+
+
 
   $picture = explode('.',$_FILES['picture']['name']);
   $picture_ex = end($picture);
@@ -136,7 +153,7 @@ if(isset($_POST['add-student'])){
                if($password == $c_password){
                  $password=md5($password);
   
-                 $query = "INSERT INTO `student_info`(`name`, `roll`, `class`, `city`, `contact`, `email`, `username`, `password`, `photo`, `status`) VALUES ('$name', '$roll', '$class', '$city', '$contact', '$email', '$username', '$password', '$picture_name', 'inactive')";
+                 $query = "INSERT INTO `student_info`(`name`, `roll`, `class`, `city`, `contact`, `email`, `username`, `password`, `photo`, `status`, `otp`) VALUES ('$name', '$roll', '$class', '$city', '$contact', '$email', '$username', '$password', '$picture_name', 'inactive', '$body')";
                  $result = mysqli_query($link, $query);
 
   if($result){
@@ -168,6 +185,8 @@ $email_error = "This Email Address Already Exists";
 
 
 }
+
+
 
 }
 
