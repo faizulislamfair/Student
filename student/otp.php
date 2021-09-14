@@ -204,62 +204,6 @@ $email_error = "This Email Address Already Exists";
 <div style="margin-top:25px; margin-left:325px;"  class="row">
    <div class="col-sm-6">
      <form action="" method="POST" enctype="multipart/form-data">
-
-        <div class="form-group">
-          <label for="name">Student Name</label>
-          <input type="text" name="name" placeholder="Student Name" id="name" class="form-control" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="roll">Student Roll</label>
-          <input type="text" name="roll" placeholder="Roll" id="roll" class="form-control" pattern="[0-9]{7}" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="city">City</label>
-          <input type="text" name="city" placeholder="City" id="city" class="form-control" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="contact">Contact</label>
-          <input type="text" name="contact" placeholder="01*********" id="contact" class="form-control" pattern="01[1|3|5|6|7|8|9][0-9]{8}" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="class">Class</label>
-          <select id="class" class="form-control" name="class" required="" >
-            <option value="">Select</option>
-            <option value="1st">1st</option>
-            <option value="2nd">2nd</option>
-            <option value="3rd">3rd</option>
-            <option value="4th">4th</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input class="form-control"  id="email" type="email" name="email" placeholder="Email" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input class="form-control" id="username" type="text" name="username" placeholder="Username" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input class="form-control" id="password" type="password" name="password" placeholder="Password" required="" >
-        </div>
-
-        <div class="form-group">
-          <label for="c_password">Confirm Password</label>
-          <input class="form-control" id="c_password" type="password" name="c_password" placeholder="Confirm Password" required=""  >
-        </div>
-
-        <div class="form-group">
-          <label for="picture">Picture</label>
-          <input type="file" name="picture" id="picture" required="" >
-        </div>
         <br>
         <div class="form-group">
           <input style="height: 32px;" type="submit" value="Add" name="add-student" class="btn btn-primary">
@@ -271,9 +215,9 @@ $email_error = "This Email Address Already Exists";
      
 
 
-<footer class="footer-area">
+<footer class="footer-area" style="width: 100%; position: absolute; bottom: 0;">
 			<p>Copyright &COPY; 2021 S.M. Faizul Islam Fair</p>
-		</footer>
+</footer>
 
 
 </body>
