@@ -4,30 +4,26 @@ require_once './dbcon.php';
 
 session_start();
 
-if(isset($_SESSION['student_login'])){
-  header('location: systemstudent.php');
-}
-
 if(isset($_POST['login'])) {
       
+  $email = $_POST['email'];
   $otp = $_POST['otp'];
 
 
-  $studentname_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `otp` = '$body'");
-  if(mysqli_num_rows($studentname_check) > 0){
-   $row = mysqli_fetch_assoc($studentname_check);
+  $otp_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `email` = '$email'");
+  if(mysqli_num_rows($otp_check) > 0){
+   $row = mysqli_fetch_assoc($otp_check);
 
-   if($row['password'] == md5($password)){
-    if($row['status'] == 'active'){
-      $_SESSION['student_login'] = $Roll;
-      header('location: systemstudent.php');
-    } 
-   } else {
-       $wrong_otp = "The OTP Is Wrong";
+   if($row['otp'] == $otp){
+    $query = "UPDATE `student_info` SET `otp` = 'okay' WHERE `email` = '$email'";
+    $result = mysqli_query($link, $query);
+      header('location: login.php');
    }
-
+   else {
+       $otp_password = "The Password Is Wrong";
+   }
   } else {
-       $otp_not_found = "This OTP Is Invalid";
+       $otp_not_found = "This Roll Number Is Not Found";
   }
 
 
@@ -87,7 +83,6 @@ if(isset($_POST['login'])) {
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin-left: 28px;
 }
     </style>
   
@@ -101,7 +96,7 @@ if(isset($_POST['login'])) {
    </header>
      <br> <br>
      <a href="../"><input style="transform:translateX(-25px); float:right;" value="Back" class="btn btn-primary"></a>
-     <h1 style="margin-left:465px;">Email Verification</h1>
+     <h1 style="margin-left:450px;">Email Verification</h1>
 
 
      <div style="margin-right:100px;" class="row">
@@ -111,20 +106,23 @@ if(isset($_POST['login'])) {
       <br> 
          <form action="" method="POST">
            <div>
-              <input type="password" placeholder="OTP" name="otp" required="" class="form-control" value="<?php if(isset($body)) { echo $body; } ?>">
+              <input type="email" placeholder="Email" name="email" required="" class="form-control" value="<?php if(isset($email)) { echo $email; } ?>">
            </div>
            <br>
            <div>
-           <input style="transform: translateX(200px);" type="submit" value="Confirm" name="login" class="btn btn-primary">
+              <input type="password" placeholder="OTP" name="otp" required="" class="form-control" value="<?php if(isset($otp)) { echo $otp; } ?>">
+           </div>
+           <br>
+           <div>
+           <input style="transform: translateX(170px);" type="submit" value="Confirm" name="login" class="btn btn-primary">
            </div>
          </form>
          </div>
       </div>
      </div>
      <br>
-     <?php if(isset($roll_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.roll_not_found.'</div>'; } ?>
-     <?php if(isset($wrong_password)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$wrong_password.'</div>'; } ?>
-     <?php if(isset($status_inactive)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$status_inactive.'</div>'; } ?>
+     <?php if(isset($otp_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$otp_not_found.'</div>'; } ?>
+     <?php if(isset($wrong_otp)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$wrong_otp.'</div>'; } ?>
 
    </div>
 
