@@ -4,6 +4,7 @@ require_once './dbcon.php';
 
 session_start();
 
+
 if(isset($_POST['login'])) {
       
   $email = $_POST['email'];
@@ -18,12 +19,11 @@ if(isset($_POST['login'])) {
     $query = "UPDATE `student_info` SET `otp` = 'okay' WHERE `email` = '$email'";
     $result = mysqli_query($link, $query);
       header('location: login.php');
-   }
-   else {
-       $otp_password = "The Password Is Wrong";
+   } else {
+       $wrong_otp = "The OTP Is Wrong";
    }
   } else {
-       $otp_not_found = "This Roll Number Is Not Found";
+       $mail_not_found = "This Email ID Is Not Found";
   }
 
 
@@ -121,7 +121,7 @@ if(isset($_POST['login'])) {
       </div>
      </div>
      <br>
-     <?php if(isset($otp_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$otp_not_found.'</div>'; } ?>
+     <?php if(isset($mail_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$mail_not_found.'</div>'; } ?>
      <?php if(isset($wrong_otp)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$wrong_otp.'</div>'; } ?>
 
    </div>

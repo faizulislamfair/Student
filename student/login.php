@@ -19,6 +19,8 @@ if(isset($_POST['login'])) {
    $row = mysqli_fetch_assoc($studentname_check);
 
    if($row['password'] == md5($password)){
+
+    if($row['otp'] == 'okay') { 
     if($row['status'] == 'active'){
       $_SESSION['student_login'] = $Roll;
       header('location: systemstudent.php');
@@ -26,6 +28,10 @@ if(isset($_POST['login'])) {
       $status_inactive = "Your Status Is Inactive";
     }
    } else {
+     $not_verified = "Your Email ID is not verified";
+   }
+
+  } else {
        $wrong_password = "The Password Is Wrong";
    }
 
@@ -130,7 +136,9 @@ if(isset($_POST['login'])) {
       </div>
      </div>
      <br>
-     <?php if(isset($roll_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.roll_not_found.'</div>'; } ?>
+
+     <?php if(isset($not_verified)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$not_verified.'</div>'; } ?>
+     <?php if(isset($roll_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$roll_not_found.'</div>'; } ?>
      <?php if(isset($wrong_password)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$wrong_password.'</div>'; } ?>
      <?php if(isset($status_inactive)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$status_inactive.'</div>'; } ?>
 
