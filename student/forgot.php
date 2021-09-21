@@ -2,11 +2,6 @@
 
 require_once './dbcon.php';
 
-session_start();
-
-if(isset($_SESSION['student_login'])){
-  header('location: systemstudent.php');
-}
 
 if(isset($_POST['login'])) {
       
@@ -114,29 +109,20 @@ a:hover{
    </header>
      <br> <br>
      <a href="../"><input style="transform:translateX(-25px); float:right;" value="Back" class="btn btn-primary"></a>
-     <h1 style="margin-left:465px;">Student Login</h1>
 
 
      <div style="margin-right:100px;" class="row">
       <div class="col-sm-4 col-sm offset-4">
       <div>
-
-      <br> <br>
+         <br>
+         <h4>Enter your Email ID:</h4>
          <form action="login.php" method="POST">
-           <div>
-              <input type="text" placeholder="Roll Number" name="Roll" required="" class="form-control" value="<?php if(isset($Roll)) { echo $Roll; } ?>">
+           <div class="form-group">
+            <input class="form-control"  id="email" type="email" name="email" placeholder="Email" required="" >
            </div>
-           <br>
            <div>
-              <input type="password" placeholder="Password" name="password" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
+            <input type="submit" value="Login" name="login" class="btn btn-primary">
            </div>
-           <br>
-           <div>
-           <input type="submit" value="Login" name="login" class="btn btn-primary">
-           <a href="register.php"><input style="transform:translateX(70px); float:right;" value="Register" class="btn btn-primary"></a>
-           </div>
-           <br>
-           <a style="color: #2155c5;" target="_blank" href="forgot.php">Forgot password?</a>
          </form>
          </div>
       </div>
