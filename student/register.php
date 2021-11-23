@@ -82,7 +82,7 @@ if(isset($_POST['add-student'])){
   if(isset($_POST['email'])){
     
     $email = $_POST['email'];
-    $subject = "Email Alright";
+    $subject = "OTP Code";
     $body = substr(str_shuffle("0123456789"), 0, 6);
     $headers = "From: penguinpakhi@gmail.com";
   
