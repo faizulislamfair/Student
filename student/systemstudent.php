@@ -19,66 +19,34 @@ if(!isset($_SESSION['student_login'])){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
+  
+  <link rel="stylesheet" type="text/css" href="../fonts/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.min.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/btn.css">
   <title>SIMS</title>
+
+
 </head>
 
 <body>
 
-<header style="width:100%; height:90px; background: #2887e6;">
+<header style="width:100%; height:80px; background: #2887e6;">
    </header>
-
-  <div class="container">
+  
     <br>
 
     <a style="float:right;" class="btn btn-primary" href="logout.php">Logout</a>
     <br> <br>
-    
-    <br> <br>
+  
 
-    <!-- <br> <br>
-    <div class="row text-center">
-      <div class="col-sm-4 col-sm offset-4">
-        <form action="" method="post">
-          <table class="table table-bordered">
-            <tr>
-              <td colspan="2"><label>Student Information</label></td>
-            </tr>
-            <tr>
-              <td><label for="choose">Choose Year</label></td>
-              <td>
-                <select class="form-control" id="choose" name="choose">
-                  <option value="">Select</option>
-                  <option value="1st">1st Year</option>
-                  <option value="2nd">2nd Year</option>
-                  <option value="3rd">3rd Year</option>
-                  <option value="4th">4th Year</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td><label for="roll">Roll</label></td>
-              <td><input class="form-control" type="text" name="roll" pattern="[0-9]{7}" placeholder="Roll"></td>
-            </tr>
-            <tr>
-              <td colspan="2"><input type="submit" name="show_info" value="Show Info"></td>
-            </tr>
-          </table>
-        </form>
 
-      </div>
-    </div> -->
 
     <?php
      
      require_once 'dbcon.php';
 
-    // if(isset($_POST['show_info'])) {
-
-      // $choose = $_POST['choose'];
-      // $roll = $_POST['roll'];
+ 
 
       $result = mysqli_query($link, "SELECT * FROM `student_info` WHERE `roll` = ".$_SESSION['student_login']);
       
@@ -87,47 +55,98 @@ if(!isset($_SESSION['student_login'])){
         $row = mysqli_fetch_assoc($result);
         ?>
 
-    <div class="row">
-      <div class="col-sm-6 col-sm offset-3">
-        <table class="table table-bordered">
-          <tr>
-            <td rowspan="4">
-              <img src="../admin/student_images/<?= $row['photo'] ?>" class="img-thumbnail" style="margin-top: 10px; width: 150px; border-radius:95%;"
-                alt="Student's Image">
-            </td>
-            <td>Name</td>
-            <td><?= ucwords($row['name']); ?></td>
-          </tr>
-          <tr>
-
-            <td>Roll</td>
-            <td><?= $row['roll'] ?></td>
-          </tr>
-          <tr>
-
-            <td>Class</td>
-            <td><?= $row['class'] ?></td>
-          </tr>
-          <tr>
-
-            <td>City</td>
-            <td><?= ucwords($row['city']); ?></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-      </div>
 
 
+<h1 style="margin-left: 295px; color: #337ab7"><i class="fa fa-user"></i> Student Profile</h1>
 
-    <?php
+
+<div style="margin-top:25px; margin-left:275px;" class="row">
+  <div class="col-sm-6">
+    <table class="table table-bordered">
+
+      <tr>
+        <td>Name</td>
+        <td><?=  ucwords($row['name']); ?></td>
+      </tr>
+
+      <tr>
+        <td>Roll</td>
+        <td><?= $row['roll']; ?></td>
+      </tr>
+
+      <tr>
+        <td>Username</td>
+        <td><?= $row['username']; ?></td>
+      </tr>
+
+      <tr>
+        <td>Email</td>
+        <td><?= $row['email']; ?></td>
+      </tr>
+
+      <tr>
+        <td>Class</td>
+        <td><?= $row['class']; ?></td>
+      </tr>
+
+      <tr>
+        <td>City</td>
+        <td><?= $row['city']; ?></td>
+      </tr>
+      
+      <tr>
+        <td>Contact</td>
+        <td><?= $row['contact']; ?></td>
+      </tr>
+
+      <tr>
+        <td>Signup Date</td>
+        <td><?= $row['datetime']; ?></td>
+      </tr>
+
+    </table>
+    
+    <a href="index.php?page=update-user&id=<?php echo base64_encode($user_row['id']); ?>" style="margin-top:25px;" class="btn btn-primary">Edit Profile</a>
+  </div>
+  <div class="col-sm-6">
+    <a href="">
+      <img style="width:200px; height=250px;" class="img-thumbnail img-sm" src="../admin/student_images/<?= $row['photo'] ?>" alt="Thumbnail">
+    </a>
+    <br> <br>
+
+<?php
+
+if(isset($_POST['upload'])) {
+  $photo = explode('.', $_FILES['photo']['name']);
+  $photo = end($photo);
+  $photo_name = $session_user.'.'.$photo;
+
+  $upload = mysqli_query($link, "UPDATE `users` SET `photo`='$photo_name' WHERE `username` = '$session_user'");
+  if($upload){
+    move_uploaded_file($_FILES['photo']['tmp_name'], 'images/'.$photo_name);
+  }
+}
+
+?>
+
+
+    <form action="" enctype="multipart/form-data" method="POST">
+      <label for="photo">Profile Picture</label>
+      <input type="file" name="photo" required="" id="photo">
+      <br>
+      <input type="submit" name="upload" value="Upload" class="btn btn-primary">
+    </form>
+  </div>
+</div>
+
+
+
+<?php
 
 
 $db_sinfos = mysqli_query($link, "SELECT * FROM `student_marks1` ");
 $rows = mysqli_fetch_all($db_sinfos, MYSQLI_ASSOC);
 $number_of_rows = count($rows);
-//echo $number_of_rows; 
 
 $eletrical_lowest=20;
 $eletrical_highest=0;
@@ -176,32 +195,12 @@ foreach($rows as $row){
  
 }
 
-//foreach($rows as $row){
 
 
 ?>
 
 
-    <!-- <br> <br>
-    <div class="row text-center">
-      <div class="col-sm-4 col-sm offset-4">
-        <form action="" method="post">
-          <table class="table table-bordered">
-            <tr>
-              <td colspan="2"><label>Student Information</label></td>
-            </tr>
-            <tr>
-              <td><label for="Roll">Roll</label></td>
-              <td><input class="form-control" type="text" name="Roll" placeholder="Roll"></td>
-            </tr>
-            <tr>
-              <td colspan="2"><input type="submit" name="shows_info" value="Show Info"></td>
-            </tr>
-          </table>
-        </form>
 
-      </div>
-    </div> -->
 
     <?php
      
@@ -209,7 +208,6 @@ foreach($rows as $row){
 
     
 
-      //$Roll = $_POST['roll'];
 
       $result_ct = mysqli_query($link, "SELECT * FROM `student_marks1` WHERE `Roll` = ".$_SESSION['student_login']);
 
@@ -310,7 +308,6 @@ foreach($rows as $row){
 $db_sinfos = mysqli_query($link, "SELECT * FROM `student_marks2` ");
 $rows = mysqli_fetch_all($db_sinfos, MYSQLI_ASSOC);
 $number_of_rows = count($rows);
-//echo $number_of_rows; 
 
 $eletrical_lowest=20;
 $eletrical_highest=0;
@@ -359,32 +356,11 @@ foreach($rows as $row){
  
 }
 
-//foreach($rows as $row){
-
 
 ?>
 
 
-  <!-- <br> <br>
-    <div class="row text-center">
-      <div class="col-sm-4 col-sm offset-4">
-        <form action="" method="post">
-          <table class="table table-bordered">
-            <tr>
-              <td colspan="2"><label>Student Information</label></td>
-            </tr>
-            <tr>
-              <td><label for="Roll">Roll</label></td>
-              <td><input class="form-control" type="text" name="Roll" placeholder="Roll"></td>
-            </tr>
-            <tr>
-              <td colspan="2"><input type="submit" name="shows_info" value="Show Info"></td>
-            </tr>
-          </table>
-        </form>
 
-      </div>
-    </div> -->
 
   <?php
      
@@ -537,32 +513,13 @@ foreach($rows as $row){
  
 }
 
-//foreach($rows as $row){
+
 
 
 ?>
 
 
-  <!-- <br> <br>
-    <div class="row text-center">
-      <div class="col-sm-4 col-sm offset-4">
-        <form action="" method="post">
-          <table class="table table-bordered">
-            <tr>
-              <td colspan="2"><label>Student Information</label></td>
-            </tr>
-            <tr>
-              <td><label for="Roll">Roll</label></td>
-              <td><input class="form-control" type="text" name="Roll" placeholder="Roll"></td>
-            </tr>
-            <tr>
-              <td colspan="2"><input type="submit" name="shows_info" value="Show Info"></td>
-            </tr>
-          </table>
-        </form>
 
-      </div>
-    </div> -->
 
   <?php
      
@@ -570,7 +527,7 @@ foreach($rows as $row){
 
     
 
-      //$Roll = $_POST['roll'];
+      
 
       $result_ct = mysqli_query($link, "SELECT * FROM `student_marks3` WHERE `Roll` = ".$_SESSION['student_login']);
 
@@ -668,7 +625,6 @@ foreach($rows as $row){
 $db_sinfos = mysqli_query($link, "SELECT * FROM `student_marks4` ");
 $rows = mysqli_fetch_all($db_sinfos, MYSQLI_ASSOC);
 $number_of_rows = count($rows);
-//echo $number_of_rows; 
 
 $eletrical_lowest=20;
 $eletrical_highest=0;
@@ -717,32 +673,13 @@ foreach($rows as $row){
  
 }
 
-//foreach($rows as $row){
+
 
 
 ?>
 
 
-  <!-- <br> <br>
-    <div class="row text-center">
-      <div class="col-sm-4 col-sm offset-4">
-        <form action="" method="post">
-          <table class="table table-bordered">
-            <tr>
-              <td colspan="2"><label>Student Information</label></td>
-            </tr>
-            <tr>
-              <td><label for="Roll">Roll</label></td>
-              <td><input class="form-control" type="text" name="Roll" placeholder="Roll"></td>
-            </tr>
-            <tr>
-              <td colspan="2"><input type="submit" name="shows_info" value="Show Info"></td>
-            </tr>
-          </table>
-        </form>
 
-      </div>
-    </div> -->
 
   <?php
      
@@ -750,7 +687,6 @@ foreach($rows as $row){
 
     
 
-      //$Roll = $_POST['roll'];
 
       $result_ct = mysqli_query($link, "SELECT * FROM `student_marks4` WHERE `Roll` = ".$_SESSION['student_login']);
 

@@ -1,4 +1,4 @@
-<h1 style="margin-left: 295px;" class="text-primary"><i class="fa fa-user"></i> User Profile</h1>
+<h1 style="margin-left: 295px;" class="text-primary"><i class="fa fa-user"></i> Admin Profile</h1>
 
 
 <?php
