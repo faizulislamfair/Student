@@ -3,6 +3,8 @@ session_start();
 require_once './dbcon.php';
 if(!isset($_SESSION['student_login'])){
      header('location: login.php');
+
+
 }
 
 
@@ -26,6 +28,34 @@ if(!isset($_SESSION['student_login'])){
   <link rel="stylesheet" href="../css/btn.css">
   <title>SIMS</title>
 
+<style>
+   .btn-primary, .btn-primary:active, .btn-primary:visited{
+    background-color: #2155c5;
+    color: white;
+    border-radius: 15px;
+    border:none;
+    transition: 0.2s;
+    font-weight: 450;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 80px;
+    height: 38px;
+}
+
+.btn:hover, .btn-info:hover, .btn-primary:hover {
+    background-color: #E5E4E3;
+    color:#2155c5;
+    border-radius: 15px;
+    border:1px solid #2155c5;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.2s;
+    font-weight: 450;
+    width: 80px;
+    height: 38px;
+}
+ </style>
+
 
 </head>
 
@@ -46,13 +76,17 @@ if(!isset($_SESSION['student_login'])){
      
      require_once 'dbcon.php';
 
- 
+     $session_user = $_SESSION['student_login']; 
 
       $result = mysqli_query($link, "SELECT * FROM `student_info` WHERE `roll` = ".$_SESSION['student_login']);
-      
 
       if(mysqli_num_rows($result) == 1){
         $row = mysqli_fetch_assoc($result);
+
+        $session_user = $_SESSION['student_login'];
+
+
+
         ?>
 
 
@@ -106,13 +140,13 @@ if(!isset($_SESSION['student_login'])){
 
     </table>
     
-    <a href="index.php?page=update-user&id=<?php echo base64_encode($user_row['id']); ?>" style="margin-top:25px;" class="btn btn-primary">Edit Profile</a>
+    <a href="update-student&id=<?php echo base64_encode($row['id']); ?>" style="margin-top:25px; width: 100px;" class="btn btn-primary">Edit Profile</a>
   </div>
   <div class="col-sm-6">
     <a href="">
       <img style="width:200px; height=250px;" class="img-thumbnail img-sm" src="../admin/student_images/<?= $row['photo'] ?>" alt="Thumbnail">
     </a>
-    <br> <br>
+    <br> <br> <br> <br>
 
 <?php
 
@@ -121,9 +155,9 @@ if(isset($_POST['upload'])) {
   $photo = end($photo);
   $photo_name = $session_user.'.'.$photo;
 
-  $upload = mysqli_query($link, "UPDATE `users` SET `photo`='$photo_name' WHERE `username` = '$session_user'");
+  $upload = mysqli_query($link, "UPDATE `student_info` SET `photo`='$photo_name' WHERE `roll` = '$session_user'");
   if($upload){
-    move_uploaded_file($_FILES['photo']['tmp_name'], 'images/'.$photo_name);
+    move_uploaded_file($_FILES['photo']['tmp_name'], '../admin/student_images/'.$photo_name);
   }
 }
 
@@ -138,6 +172,10 @@ if(isset($_POST['upload'])) {
     </form>
   </div>
 </div>
+
+
+
+<h2 style="text-align:center; margin-top:55px;">CT Marks</h2>
 
 
 
@@ -213,7 +251,7 @@ foreach($rows as $row){
 
       if(mysqli_num_rows($result_ct) == 1){
 
-        echo '<br> <br>
+        echo '<br> <br> 
         <div>
           <h3 style="text-align:center;">CT-1</h3>
         </div>';
