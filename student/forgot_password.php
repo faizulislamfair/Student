@@ -2,46 +2,29 @@
 
 require_once './dbcon.php';
 
+session_start();
+
 
 if(isset($_POST['login'])) {
       
-  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $c_password = $_POST['c_password'];
 
-  $studentmail_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `email` = '$email'");
-  if(mysqli_num_rows($studentmail_check) > 0){
-   $row = mysqli_fetch_assoc($studentmail_check);
 
-   if($row['email'] == $email){
-      
-    if($row['otp'] == 'okay') { 
-    if($row['status'] == 'active'){
-      if(isset($_POST['email'])){
-    
-        $email = $_POST['email'];
-        $subject = "OTP Code";
-        $body = substr(str_shuffle("0123456789"), 0, 6);
-        $headers = "From: penguinpakhi@gmail.com";
-      
-        if(mail($email, $subject, $body, $headers)){
-            //echo "<b>email sent to $email</b>";
-        }else{
-            echo "Email sending failed..";
-        }
-      
-      
-      }
-    
-      header('location: forgot_password.php');
-    } else {
-      $status_inactive = "Your Status Is Inactive";
-    }
+  $otp_check = mysqli_query($link, "SELECT * FROM `student_info` WHERE `email` = '$email'");
+  if(mysqli_num_rows($otp_check) > 0){
+   $row = mysqli_fetch_assoc($otp_check);
+
+   if($row['otp'] == $otp){
+    $query = "UPDATE `student_info` SET `otp` = 'okay' WHERE `email` = '$email'";
+    $result = mysqli_query($link, $query);
+      header('location: login.php');
    } else {
-     $not_verified = "Your Email ID is not verified";
+       $wrong_otp = "The OTP Is Wrong";
    }
-
-  } 
-
-  } 
+  } else {
+       $mail_not_found = "This Email ID Is Not Found";
+  }
 
 
 }
@@ -101,10 +84,6 @@ if(isset($_POST['login'])) {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-
-a:hover{
-  background-color: #E5E4E3;
-}
     </style>
   
 
@@ -117,28 +96,33 @@ a:hover{
    </header>
      <br> <br>
      <a href="../"><input style="transform:translateX(-25px); float:right;" value="Back" class="btn btn-primary"></a>
+     <h1 style="margin-left:450px;">Reset Password</h1>
 
 
      <div style="margin-right:100px;" class="row">
       <div class="col-sm-4 col-sm offset-4">
       <div>
-         <br>
-         <h4>Enter your Email ID:</h4>
-         <form action="login.php" method="POST">
-           <div class="form-group">
-            <input class="form-control"  id="email" type="email" name="email" placeholder="Email" required="" >
-           </div>
+
+      <br> 
+         <form action="" method="POST">
            <div>
-            <input style="width: 180px;" type="submit" value="Send Reset Code" name="login" class="btn btn-primary">
+              <input type="password" placeholder="Password" name="email" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
+           </div>
+           <br>
+           <div>
+              <input type="password" placeholder="Confirm Password" name="otp" required="" class="form-control" value="<?php if(isset($c_password)) { echo $c_password; } ?>">
+           </div>
+           <br>
+           <div>
+           <input style="transform: translateX(170px);" type="submit" value="Confirm" name="login" class="btn btn-primary">
            </div>
          </form>
          </div>
       </div>
      </div>
      <br>
-
-     <?php if(isset($not_verified)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$not_verified.'</div>'; } ?>
-     <?php if(isset($status_inactive)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$status_inactive.'</div>'; } ?>
+     <?php if(isset($mail_not_found)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$mail_not_found.'</div>'; } ?>
+     <?php if(isset($wrong_otp)) { echo '<div class="alert alert-danger col-sm-2 col-sm offset-5">'.$wrong_otp.'</div>'; } ?>
 
    </div>
 
