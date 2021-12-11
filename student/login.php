@@ -10,7 +10,7 @@ if(isset($_SESSION['student_login'])){
 
 if(isset($_POST['login'])) {
       
-  $Roll = $_POST['Roll'];
+  $Roll = $_POST['roll'];
   $password = $_POST['password'];
 
 
@@ -124,7 +124,7 @@ a:hover{
       <br> <br>
          <form action="login.php" method="POST">
            <div>
-              <input type="text" placeholder="Roll Number" name="Roll" required="" class="form-control" value="<?php if(isset($Roll)) { echo $Roll; } ?>">
+              <input type="text" placeholder="Roll Number" name="roll" required="" class="form-control" value="<?php if(isset($Roll)) { echo $Roll; } ?>">
            </div>
            <br>
            <div>

@@ -3,7 +3,7 @@
 require_once './dbcon.php';
 
 
-if(isset($_POST['login'])) {
+if(isset($_POST['email'])) {
       
   $email = $_POST['email'];
 
@@ -30,6 +30,9 @@ if(isset($_POST['login'])) {
       
       
       }
+
+      $query = "UPDATE `student_info` SET `otp` = '$body' WHERE `email` = '$email'";
+      $result = mysqli_query($link, $query);
     
       header('location: forgot_password.php');
     } else {
@@ -124,12 +127,12 @@ a:hover{
       <div>
          <br>
          <h4>Enter your Email ID:</h4>
-         <form action="login.php" method="POST">
+         <form action="" method="POST">
            <div class="form-group">
             <input class="form-control"  id="email" type="email" name="email" placeholder="Email" required="" >
            </div>
            <div>
-            <input style="width: 180px;" type="submit" value="Send Reset Code" name="login" class="btn btn-primary">
+            <input style="width: 180px;" type="submit" value="Send Reset Code" name="forgot" class="btn btn-primary">
            </div>
          </form>
          </div>
