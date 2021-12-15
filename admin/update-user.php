@@ -57,7 +57,7 @@ $db_row = mysqli_fetch_assoc($db_data);
 
 
         <div class="form-group">
-          <input style="height:35px; margin-top:15px;" type="submit" value="Update User Profile" name="update-user" class="btn btn-primary">
+          <input style="height:35px; margin-top:15px;" type="submit" value="Update Profile" name="update-user" class="btn btn-primary">
         </div>
 
      </form>

@@ -22,8 +22,11 @@ if(isset($_POST['login'])) {
 
     if($row['otp'] == 'okay') { 
     if($row['status'] == 'active'){
+
+      //setcookie("student_login", $Roll, time() - 86400 );
+
       $_SESSION['student_login'] = $Roll;
-      header('location: systemstudent.php');
+      header('location: index.php');
     } else {
       $status_inactive = "Your Status Is Inactive";
     }

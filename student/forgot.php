@@ -18,7 +18,7 @@ if(isset($_POST['email'])) {
       if(isset($_POST['email'])){
     
         $email = $_POST['email'];
-        $subject = "OTP Code";
+        $subject = "Password Reset Code";
         $body = substr(str_shuffle("0123456789"), 0, 6);
         $headers = "From: penguinpakhi@gmail.com";
       
@@ -31,7 +31,7 @@ if(isset($_POST['email'])) {
       
       }
 
-      $query = "UPDATE `student_info` SET `otp` = '$body' WHERE `email` = '$email'";
+      $query = "UPDATE `student_info` SET `forgot` = '$body' WHERE `email` = '$email'";
       $result = mysqli_query($link, $query);
     
       header('location: forgot_password.php');

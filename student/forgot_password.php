@@ -2,11 +2,11 @@
 
 require_once './dbcon.php';
 
-session_start();
 
-
-if(isset($_POST['login'])) {
+if(isset($_POST['update-password'])) {
       
+  $email = $_POST['email'];
+  $forgot = $_POST['forgot'];
   $password = $_POST['password'];
   $c_password = $_POST['c_password'];
 
@@ -15,19 +15,25 @@ if(isset($_POST['login'])) {
   if(mysqli_num_rows($otp_check) > 0){
    $row = mysqli_fetch_assoc($otp_check);
 
-   if($row['otp'] == $otp){
-    $query = "UPDATE `student_info` SET `otp` = 'okay' WHERE `email` = '$email'";
-    $result = mysqli_query($link, $query);
-      header('location: login.php');
+   if($row['email'] == $email){
+
+   if($row['forgot'] == $forgot){
+    if($password == $c_password){
+      $query = "UPDATE `student_info` SET `forgot` = 'updated', `password` = 'md5($password)'  WHERE `email` = '$email'";
+      $result = mysqli_query($link, $query);
+      header('location: login.php'); 
+    }
    } else {
        $wrong_otp = "The OTP Is Wrong";
    }
   } else {
        $mail_not_found = "This Email ID Is Not Found";
   }
-
-
+  }
+  
 }
+
+
 
 ?>
 <!doctype html>
@@ -105,6 +111,14 @@ if(isset($_POST['login'])) {
 
       <br> 
          <form action="" method="POST">
+         <div>
+              <input type="email" placeholder="Email" name="email" required="" class="form-control" value="<?php if(isset($email)) { echo $email; } ?>">
+           </div>
+           <br>
+           <div>
+              <input type="password" placeholder="OTP" name="otp" required="" class="form-control" value="<?php if(isset($otp)) { echo $otp; } ?>">
+           </div>
+           <br>
            <div>
               <input type="password" placeholder="Password" name="email" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
            </div>
@@ -114,7 +128,7 @@ if(isset($_POST['login'])) {
            </div>
            <br>
            <div>
-           <input style="transform: translateX(170px);" type="submit" value="Confirm" name="login" class="btn btn-primary">
+           <input style="transform: translateX(170px);" type="submit" value="Confirm" name="update-password" class="btn btn-primary">
            </div>
          </form>
          </div>
