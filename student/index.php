@@ -64,14 +64,25 @@ if(!isset($_SESSION['student_login'])){
 
 <body>
 
-<header style="width:100%; height:80px; background: #2887e6;">
-   </header>
-  
-    <br>
-
-    <a style="float:right; height:35px;" class="btn btn-primary" href="logout.php">Logout</a>
-    <br> <br>
-  
+<nav style="height:80px; padding-top:15px;" class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" style="color: #fff;" href="index.php">Student Information & Management System</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="logout.php" style="color: #fff;">
+								<i class="fa fa-power-off"></i> Logout
+							</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+  </nav>
    
     <div class="container-fluid">
 

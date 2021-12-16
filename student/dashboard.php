@@ -1,4 +1,4 @@
-<h1 style="margin-left:450px;" class="text-primary">
+<h1 style="margin-top:35px; margin-left:450px;" class="text-primary">
 <i class="fas fa-tachometer-alt"></i> Dashboard 
 </h1>
 
