@@ -69,7 +69,7 @@ if(!isset($_SESSION['student_login'])){
   
     <br>
 
-    <a style="float:right;" class="btn btn-primary" href="logout.php">Logout</a>
+    <a style="float:right; height:35px;" class="btn btn-primary" href="logout.php">Logout</a>
     <br> <br>
   
    
