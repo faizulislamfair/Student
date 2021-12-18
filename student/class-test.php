@@ -112,13 +112,6 @@ if(!isset($_SESSION['student_login'])){
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
-
-						<li>
-							<a href="index.php?page=user-profile" style="color: #fff;">
-								<i class="fa fa-user"></i> Profile
-							</a>
-						</li>
-
 						<li>
 							<a href="logout.php" style="color: #fff;">
 								<i class="fa fa-power-off"></i> Logout
