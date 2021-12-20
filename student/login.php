@@ -23,7 +23,10 @@ if(isset($_POST['login'])) {
     if($row['otp'] == 'okay') { 
     if($row['status'] == 'active'){
 
-      //setcookie("student_login", $Roll, time() - 86400 );
+    if( isset($_POST['remember']) ){
+        setcookie('roll', $Roll, time()+60*60*7);   
+        setcookie('password', $password, time()+60*60*7);   
+    }
 
       $_SESSION['student_login'] = $Roll;
       header('location: index.php');
@@ -127,11 +130,15 @@ a:hover{
       <br> <br>
          <form action="login.php" method="POST">
            <div>
-              <input type="text" placeholder="Roll Number" name="roll" required="" class="form-control" value="<?php if(isset($Roll)) { echo $Roll; } ?>">
+              <input type="text" placeholder="Roll Number" id="roll" name="roll" required="" class="form-control" value="<?php if(isset($Roll)) { echo $Roll; } ?>">
            </div>
            <br>
            <div>
-              <input type="password" placeholder="Password" name="password" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
+              <input type="password" placeholder="Password" id="password" name="password" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
+           </div>
+           <br>
+           <div>
+            <input type="checkbox" name="remember" value="1"> Remember Me</td>
            </div>
            <br>
            <div>
@@ -158,3 +165,17 @@ a:hover{
     </footer>
   </body>
 </html>
+
+
+<?php   
+     if(isset($_COOKIE['roll']) && isset($_COOKIE['password'])){
+     $Roll = $_COOKIE['roll'];
+     $password = $_COOKIE['password'];
+
+     echo "<script>
+           document.getElementById('roll').value = '$Roll';
+           document.getElementById('password').value = '$password';
+     </script>";
+    }
+?>
+
