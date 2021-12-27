@@ -53,7 +53,7 @@ if(isset($_POST['login'])) {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <style>
 
@@ -106,10 +106,10 @@ if(isset($_POST['login'])) {
   <header style="width:100%; height:90px; background: #2887e6;">
    </header>
    <br><br>
-   <h1 style="margin-left:470px;">Admin Login</h1>
+   <h1 class="text-center">Admin Login</h1>
   
    
-     <div style="margin-right:100px;" class="row">
+     <div class="row">
       <div class="col-sm-4 col-sm offset-4">
       <div>
         
@@ -129,7 +129,7 @@ if(isset($_POST['login'])) {
            <br>
            <div>
            <input type="submit" value="Login" name="login" class="btn btn-primary">
-           <a href="../"><input style="transform:translateX(70px); float:right;" value="Back" class="btn btn-primary"></a>
+           <a href="../"><input style="float:right;" value="Back" class="btn btn-primary"></a>
            </div>
          </form>
          </div>

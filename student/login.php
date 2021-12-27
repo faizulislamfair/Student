@@ -59,7 +59,6 @@ if(isset($_POST['login'])) {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
     <link rel="stylesheet" href="../css/btn.css">
 
     <style>
@@ -118,9 +117,10 @@ a:hover{
 
   <header style="width:100%; height:90px; background: #2887e6">
    </header>
+
      <br> <br>
      <a href="../"><input style="transform:translateX(-25px); float:right;" value="Back" class="btn btn-primary"></a>
-     <h1 style="margin-left:465px;">Student Login</h1>
+     <h1 class="text-center">Student Login</h1>
 
 
      <div style="margin-right:100px;" class="row">
@@ -143,7 +143,7 @@ a:hover{
            <br>
            <div>
            <input type="submit" value="Login" name="login" class="btn btn-primary">
-           <a href="register.php"><input style="transform:translateX(70px); float:right;" value="Register" class="btn btn-primary"></a>
+           <a href="register.php"><input style="transform:translateX(40px); float:right;" value="Register" class="btn btn-primary"></a>
            </div>
            <br>
            <a style="color: #2155c5;" target="_blank" href="forgot.php">Forgot password?</a>

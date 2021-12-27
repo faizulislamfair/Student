@@ -48,7 +48,7 @@ a.list-group-item, button.list-group-item {
 }
 
 a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
-    color: #2155c5;
+    color: #2887E6;
     text-decoration: none;
    
 }
@@ -176,7 +176,7 @@ a:hover {
  }
 
 .boxstudent:hover{
-    background-color: #2887e6;
+    background-color: #2887E6;
     transition: 0.2s;
 }
 
@@ -208,3 +208,44 @@ a:hover {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 }
+
+
+
+
+
+/* front starts */
+
+
+/* .front, .front:active, .front:visited{
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 25px;
+    width: 220px;
+    height: 200px;
+    margin: 0;
+    border: 1px #fff;
+    border-radius: 10px;
+    box-shadow: 8px 10px 25px -6px rgba(0,0,0,0.62); 
+    -webkit-box-shadow: 8px 10px 25px -6px rgba(0,0,0,0.62);
+    transition: 0.2s;
+}
+
+.front a:front{
+    color: #fff;
+    transition: 0.2s;
+ }
+
+.front:hover{
+    background-color: #2887e6;
+    transition: 0.2s;
+}
+
+.front:hover a{
+    display: block;
+    height: 200px;
+    color: #fff;
+    transition: 0.2s;
+} */
+
+/* front ends */

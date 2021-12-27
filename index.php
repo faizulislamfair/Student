@@ -4,10 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" type="text/css" href="../fonts/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/btn.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/btn.css">
  <title>Login Panels</title>
 
  <style>
@@ -53,22 +53,25 @@
 
 <div style="margin-left:325px;" class="container text-center">  
 <div class="row">
-  <div class="col-sm-3">
-    <div class="card">
-      <div class="card-body">
-        <h2> Student </h2>
-      </div>
+
+  <div class="col-sm-4">
+    <div class="boxstudent">
+	    <a href="student/login.php">
+      <i class="fas fa-user-graduate fa-lg"></i> <br>
+		   <h5 class="pt-4" style="font-size: 30px;">Student</h5>	
+	    </a>
     </div>
-     <a href="student/login.php" class="btn btn-primary mt-3" >View</a>
   </div>
-  <div class="col-sm-3">
-    <div class="card">
-      <div class="card-body">
-        <h2> Admin </h2>
-      </div>
+
+  <div class="col-sm-4">
+    <div class="boxstudent">
+	    <a href="admin/login.php">
+      <i class="fas fa-user-shield fa-lg"></i> <br> 
+		   <h5 class="pt-4" style="font-size: 30px;">Admin</h5>	
+	    </a>
     </div>
-     <a href="admin/login.php" class="btn btn-primary mt-3 " >View</a>
   </div>
+  
 </div>
 </div>
 
