@@ -20,6 +20,12 @@ if(isset($_POST['login'])) {
 
    if($row['password'] == md5($password)){
     if($row['status'] == 'active'){
+
+      if( isset($_POST['remember']) ){
+        setcookie('username', $username, time()+60*60*7);   
+        setcookie('password', $password, time()+60*60*7);   
+    }
+
       $_SESSION['user_login'] = $username;
       header('location: systemoredit.php');
     } else {
@@ -110,11 +116,15 @@ if(isset($_POST['login'])) {
       <br> <br>
          <form action="login.php" method="POST">
            <div>
-              <input type="text" placeholder="Username" name="username" required="" class="form-control" value="<?php if(isset($username)) { echo $username; } ?>">
+              <input type="text" placeholder="Username" id="username" name="username" required="" class="form-control" value="<?php if(isset($username)) { echo $username; } ?>">
            </div>
            <br>
            <div>
-              <input type="password" placeholder="Password" name="password" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
+              <input type="password" placeholder="Password" id="password" name="password" required="" class="form-control" value="<?php if(isset($password)) { echo $password; } ?>">
+           </div>
+           <br>
+           <div>
+            <input type="checkbox" name="remember" value="1"> Remember Me</td>
            </div>
            <br>
            <div>
@@ -138,3 +148,17 @@ if(isset($_POST['login'])) {
 
   </body>
 </html>
+
+
+
+<?php   
+     if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){
+     $username = $_COOKIE['username'];
+     $password = $_COOKIE['password'];
+
+     echo "<script>
+           document.getElementById('username').value = '$username';
+           document.getElementById('password').value = '$password';
+     </script>";
+    }
+?>
